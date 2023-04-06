@@ -1,17 +1,14 @@
 import pandas as pd
 import numpy as np
 
-from scipy.stats import norm
+from scipy.stats import gamma
 
+chat_id = 496613075 # Ваш chat ID, не меняйте название переменной
 
-chat_id = 123456 # Ваш chat ID, не меняйте название переменной
-
-def solution(p: float, x: np.array) -> tuple:
-    # Измените код этой функции
-    # Это будет вашим решением
-    # Не меняйте название функции и её аргументы
+def solution(p: float, x: np.array):
     alpha = 1 - p
-    loc = x.mean()
-    scale = np.sqrt(np.var(x)) / np.sqrt(len(x))
-    return loc - scale * norm.ppf(1 - alpha / 2), \
-           loc - scale * norm.ppf(alpha / 2)
+    k = 2/(56*56)
+    q1 = gamma(len(x), 1).ppf((1-alpha)/2)
+    q2 = gamma(len(x), 1).ppf((1+alpha)/2)
+    sum = np.sum(x)
+    return (k*((q1+sum)/2)-1/2, k*((q2+sum)/2)-1/2)
