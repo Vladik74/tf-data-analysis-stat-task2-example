@@ -1,15 +1,15 @@
 import pandas as pd
 import numpy as np
 
-from scipy.stats import gamma
+from scipy.stats import norm
 
-chat_id = 496613075 # Ваш chat ID, не меняйте название переменной
+chat_id = 674922610 # Ваш chat ID, не меняйте название переменной
 
-def solution(p: float, x: np.array):
+def solution(p: float, x: np.array) -> float:
+    # Измените код этой функции
+    # Это будет вашим решением
+    # Не меняйте название функции и её аргументы
     alpha = 1 - p
-    k = 2/(56*56)
-    x_len = len(x)
-    q1 = gamma(x_len, 1).ppf((1-alpha)/2)
-    q2 = gamma(x_len, 1).ppf((1+alpha)/2)
-    sum = np.sum(x)
-    return (k*((q1+sum)/2)-1/2, k*((q2+sum)/2)-1/2)
+    max = x.max()
+    return (max-((max - 0.008) * norm.ppf(1 - alpha / 2) / np.sqrt(2*len(x))), 
+    max-((max - 0.008) * norm.ppf(1 - alpha / 2) / np.sqrt(2*len(x)))) 
